@@ -2483,3 +2483,490 @@
 		<script type="text/javascript" crossorigin="anonymous" id="main-js" src="./main.js?ver=606"></script>
 	</body>
 </html>
+
+				<div class="tab-pane fade" id="new-tab" role="tabpanel" aria-labelledby="new-tab-link">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <!-- código HTML para exibir as câmeras dos personagens -->
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <!-- código HTML para exibir os botões para rolar dados de RPG e o campo de anotações -->
+    </div>
+  </div>
+</div>
+
+				// código JavaScript para exibir as câmeras dos personagens
+// substitua os valores de imagem e nome com as informações do personagem
+$("#camera1").append('<img src="https://media.discordapp.net/attachments/809918451195314226/1099392461861834802/459_Sem_Titulo_20230422144803.png?width=332&height=559">');
+$("#camera1").append('<div class="character-name">Nome do personagem</div>');
+
+// código JavaScript para exibir os botões para rolar dados de RPG e o campo de anotações
+$("#dice-buttons").append('<button class="btn btn-primary dice-button" data-dice="d20" data-num-dice="2" data-attribute="for">Rolar Força</button>');
+$("#dice-buttons").append('<button class="btn btn-primary dice-button" data-dice="d6" data-num-dice="1">Rolar D6</button>');
+$("#notes-section").append('<textarea class="form-control" rows="4" placeholder="Anotações dos jogadores"></textarea>');
+
+// código JavaScript para exibir o histórico de dados rolados
+$("#dice-history").append('<div class="dice-roll">Você rolou 2d20 (Força) e obteve um resultado de 15.</div>');
+
+// código JavaScript para criar campos de entrada para as habilidades dos monstros e seus nomes
+$("#monster-skills").append('<input type="text" class="form-control monster-skill" placeholder="Nome da habilidade">');
+$("#monster-skills").append('<textarea class="form-control monster-skill-desc" placeholder="Descri
+
+	<button onclick="rollDice(20)">Roll d20</button>
+
+	function rollDice(sides) {
+  var result = Math.floor(Math.random() * sides) + 1;
+  alert("You rolled a " + result);
+}
+
+	
+	function animateRoll(element) {
+  anime({
+    targets: element,
+    translateY: [
+      { value: -100, duration: 500 },
+      { value: 0, duration: 500 }
+    ],
+    rotate: {
+      value: '+=360',
+      duration: 1000,
+      easing: 'easeInOutSine'
+    }
+  });
+}
+
+	<div id="d20" class="die">20</div>
+
+	function rollDice(sides) {
+  var result = Math.floor(Math.random() * sides) + 1;
+  var die = document.getElementById('d20');
+  animateRoll(die);
+  alert("You rolled a " + result);
+}
+
+	<img id="player-image" src="https://example.com/player1.png">
+
+	var image = document.getElementById('player-image');
+image.src = 'https://example.com/player2.png';
+
+	<textarea id="player-notes" rows="10" cols="
+
+				       
+				       <div id="anotacoes"></div>
+			
+			#anotacoes {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+			<!-- index.html -->
+<div id="anotacoes"></div>
+
+<script>
+  // Verifica se o navegador suporta a API Web Storage
+  if (typeof(Storage) !== "undefined") {
+    // Recupera as anotações armazenadas localmente, se existirem
+    var anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || {};
+    var notas = anotacoes.notas || "";
+
+    // Exibe as anotações na seção correspondente
+    document.getElementById("anotacoes").innerHTML = '<textarea id="notas">' + notas + '</textarea>';
+
+    // Salva as anotações localmente sempre que houver uma alteração
+    document.getElementById("notas").addEventListener("input", function() {
+      anotacoes.notas = this.value;
+      localStorage.setItem("anotacoes", JSON.stringify(anotacoes));
+    });
+  } else {
+    // O navegador não suporta a API Web Storage
+    alert("Seu navegador não suporta armazenamento local.");
+  }
+
+			</script>
+
+			function rollDice(diceString) {
+  var diceArr = diceString.split("d");
+  var numDice = parseInt(diceArr[0]);
+  var numFaces = parseInt(diceArr[1]);
+
+  var result = 0;
+  for (var i = 0; i < numDice; i++) {
+    result += Math.floor(Math.random() * numFaces) + 1;
+  }
+  
+  return result;
+}
+
+			      // seleciona o botão de rolagem do d20
+var d20Button = $('#dice-buttons .dice-button[data-dice="d20"]');
+
+// adiciona o evento de clique
+d20Button.on('click', function() {
+  // executa a animação de rolagem do dado
+  rollAnimation('d20');
+  
+  // rola o dado e exibe o resultado
+  var result = rollDice('d20');
+  alert('Resultado: ' + result);
+});
+
+			      
+			      <div id="resultados">
+  <h2>Resultados</h2>
+  <ul id="lista-resultados"></ul>
+</div>
+
+		#resultados {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#resultados h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#lista-resultados {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#lista-resultados li {
+  margin-bottom: 5px;
+}
+
+.resultado-bem-sucedido {
+  color: green;
+}
+
+.resultado-malsucedido {
+  color: red;
+}
+
+		function rolarDados(tipo, numDados, modificador) {
+  var resultados = [];
+  var soma = modificador || 0;
+  
+  for (var i = 0; i < numDados; i++) {
+    var resultado = Math.floor(Math.random() * tipo) + 1;
+    resultados.push(resultado);
+    soma += resultado;
+  }
+
+  var resultadoFinal = soma;
+
+  if (tipo === 20) {
+    if (resultadoFinal <= 5) {
+      resultadoFinal = "Desastre (" + resultadoFinal + ")";
+    } else if (resultadoFinal <= 10) {
+      resultadoFinal = "Fracasso (" + resultadoFinal + ")";
+    } else if (resultadoFinal <= 15) {
+      resultadoFinal = "Normal (" + resultadoFinal + ")";
+    } else if (resultadoFinal <= 19) {
+      resultadoFinal = "Sucesso (" + resultadoFinal + ")";
+    } else {
+      resultadoFinal = "Crítico (" + resultadoFinal + ")";
+    }
+  }
+
+  var li = document.createElement("li");
+  li.textContent = tipo + "D" + numDados + " + " + modificador + " = " + resultadoFinal;
+
+  if (tipo === 20 && resultadoFinal <= 5) {
+    li.classList.add("resultado-malsucedido");
+  } else if (tipo === 20 && resultadoFinal >= 20) {
+    li.classList.add("resultado-bem-sucedido");
+  }
+
+  document.getElementById("lista-resultados").appendChild(li);
+}
+
+var botoesDados = document.querySelectorAll(".dice-button");
+
+for (var i = 0; i < botoesDados.length; i++) {
+  botoesDados[i].addEventListener("click", function() {
+    var tipo = this.getAttribute("data-dice");
+    var numDados = this.getAttribute("data-num-dice");
+    var modificador = this.getAttribute
+
+				       <div id="historico">
+  <h2>Histórico de Rolagens</h2>
+  <ul id="lista-rolagens">
+  </ul>
+</div>
+
+	#historico {
+  margin-top: 50px;
+}
+
+#lista-rolagens {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#lista-rolagens li {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+	// Seleciona o elemento do histórico
+const historico = document.querySelector("#lista-rolagens");
+
+// Função para adicionar uma nova rolagem ao histórico
+function adicionarAoHistorico(resultado, tipo) {
+  // Cria um novo elemento <li> para a nova rolagem
+  const novaRolagem = document.createElement("li");
+
+  // Define o texto da nova rolagem com base no tipo de resultado
+  switch (tipo) {
+    case "critico":
+      novaRolagem.textContent = "Crítico! " + resultado;
+      novaRolagem.classList.add("critico");
+      break;
+    case "sucesso":
+      novaRolagem.textContent = "Sucesso! " + resultado;
+      novaRolagem.classList.add("sucesso");
+      break;
+    case "normal":
+      novaRolagem.textContent = "Normal: " + resultado;
+      novaRolagem.classList.add("normal");
+      break;
+    case "fracasso":
+      novaRolagem.textContent = "Fracasso: " + resultado;
+      novaRolagem.classList.add("fracasso");
+      break;
+    case "desastre":
+      novaRolagem.textContent = "Desastre! " + resultado;
+      novaRolagem.classList.add("desastre");
+      break;
+    default:
+      novaRolagem.textContent = resultado;
+      break;
+  }
+
+  // Adiciona a nova rolagem ao início da lista de rolagens
+  historico.prepend(novaRolagem);
+}
+
+// Exemplo de uso da função adicionarAoHistorico
+const resultadoRolagem = rolarDado(20);
+const tipoResultado = definirTipoResultado(resultadoRolagem);
+adicionarAoHistorico(resultadoRolagem, tipoResultado);
+
+	
+	<div id="fichas"></div>
+
+	// Objeto de exemplo para personagem
+const personagem1 = {
+  nome: "Gandalf",
+  imagem: "gandalf.jpg",
+  vida: 100,
+  forca: 10,
+  destreza: 8,
+  inteligencia: 15
+};
+
+// Array de personagens
+const personagens = [personagem1];
+
+// Função para atualizar a ficha do personagem
+function atualizarFicha(personagem) {
+  // Encontra o elemento HTML correspondente à ficha do personagem
+  const ficha = document.getElementById(personagem.nome);
+
+  // Atualiza os valores dos atributos na ficha
+  ficha.querySelector(".vida").textContent = `Vida: ${personagem.vida}`;
+  ficha.querySelector(".forca").textContent = `Força: ${personagem.forca}`;
+  ficha.querySelector(".destreza").textContent = `Destreza: ${personagem.destreza}`;
+  ficha.querySelector(".inteligencia").textContent = `Inteligência: ${personagem.inteligencia}`;
+}
+
+// Função para criar uma nova ficha de personagem
+function criarFicha(personagem) {
+  // Cria o elemento HTML para a ficha do personagem
+  const ficha = document.createElement("div");
+  ficha.classList.add("ficha");
+  ficha.id = personagem.nome;
+
+  // Cria os elementos HTML para exibir as informações do personagem
+  const imagem = document.createElement("img");
+  imagem.src = personagem.imagem;
+  imagem.alt = personagem.nome;
+
+  const nome = document.createElement("h2");
+  nome.textContent = personagem.nome;
+
+  const vida = document.createElement("p");
+  vida.classList.add("vida");
+  vida.textContent = `Vida: ${personagem.vida}`;
+
+  const forca = document.createElement("p");
+  forca.classList.add("forca");
+  forca.textContent = `Força: ${personagem.forca}`;
+
+  const destreza = document.createElement("p");
+  destreza.classList.add("destreza");
+  destreza.textContent = `Destreza: ${personagem.destreza}`;
+
+  const inteligencia = document.createElement("p");
+  inteligencia.classList.add("inteligencia");
+  inteligencia.textContent = `Inteligência: ${personagem.inteligencia}`;
+
+  // Cria o botão para atualizar a ficha
+  const botaoAtualizar = document.createElement("button");
+  botaoAtualizar.textContent = "Atualizar Ficha";
+  botaoAtualizar.addEventListener("click", () => atualizarFicha(personagem));
+
+  // Adiciona os elementos HTML à ficha do personagem
+  ficha.appendChild(imagem);
+  ficha.appendChild(nome);
+  ficha.appendChild(vida);
+  ficha.appendChild(forca);
+  ficha.appendChild(destreza);
+  ficha.appendChild(inteligencia);
+  ficha.appendChild(botaoAtualizar);
+
+  // Adiciona a ficha do personagem à
+	
+#fichas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.ficha {
+  border: 1px solid black;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.ficha img {
+  max-width: 100%;
+}
+
+.ficha h3 {
+  margin: 10px 0;
+}
+
+.ficha label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ficha input[type="text"],
+.ficha input[type="number"] {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.ficha button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+	
+	<div id="habilidades"></div>
+
+	// Exemplo de objeto de habilidades de monstros
+const habilidadesMonstros = [
+  {
+    nome: "Ataque",
+    descricao: "Ataca com garras afiadas",
+    dados: "1d6"
+  },
+  {
+    nome: "Mordida",
+    descricao: "Morde com dentes afiados",
+    dados: "1d8"
+  },
+  {
+    nome: "Sopro de fogo",
+    descricao: "Exala um jato de fogo",
+    dados: "2d6"
+  }
+];
+
+// Seleciona a div de habilidades
+const habilidadesDiv = document.getElementById("habilidades");
+
+// Adiciona as habilidades na página
+habilidadesMonstros.forEach(habilidade => {
+  const habilidadeDiv = document.createElement("div");
+  habilidadeDiv.classList.add("habilidade");
+
+  const nomeHabilidade = document.createElement("h3");
+  nomeHabilidade.textContent = habilidade.nome;
+  habilidadeDiv.appendChild(nomeHabilidade);
+
+  const descricaoHabilidade = document.createElement("p");
+  descricaoHabilidade.textContent = habilidade.descricao;
+  habilidadeDiv.appendChild(descricaoHabilidade);
+
+  const botaoHabilidade = document.createElement("button");
+  botaoHabilidade.textContent = "Rolar dados";
+  botaoHabilidade.addEventListener("click", () => {
+    const resultado = rolarDados(habilidade.dados);
+    alert(`Resultado: ${resultado}`);
+  });
+  habilidadeDiv.appendChild(botaoHabilidade);
+
+  habilidadesDiv.appendChild(habilidadeDiv);
+});
+
+// Função para rolar os dados
+function rolarDados(dados) {
+  const [numDados, numFaces] = dados.split("d");
+  let resultado = 0;
+  for (let i = 0; i < numDados; i++) {
+    resultado += Math.floor(Math.random() * numFaces) + 1;
+  }
+  return resultado;
+}
+
+			       #habilidades {
+  background-color: #fff;
+  border: 2px solid #000;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.habilidade {
+  margin-bottom: 10px;
+}
+
+.habilidade h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.habilidade p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.habilidade button {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+			       
